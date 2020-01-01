@@ -84,7 +84,7 @@ class Search extends Route {
 				})
 				.slice((page * 12) - 12, page * 12);
 
-			const botStatuses = await this.redis.getStatusMany(bots.map((bot) => bot.id));
+			const botStatuses = bots.length > 0 ? await this.redis.getStatusMany(bots.map((bot) => bot.id)) : [];
 
 			results = results.map((bot) => {
 				bot.status = botStatuses[results.indexOf(bot)] || 'unknown';

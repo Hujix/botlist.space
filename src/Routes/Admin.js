@@ -33,7 +33,7 @@ class Admin extends Route {
 		this.router.get('/queue', async (req, res) => {
 			let bots = await this.db.getAllUnapprovedBots();
 
-			const botStatuses = await this.redis.getStatusMany(bots.map((bot) => bot.id));
+			const botStatuses = bots.length > 0 ? await this.redis.getStatusMany(bots.map((bot) => bot.id)) : [];
 
 			bots = bots.map((bot) => {
 				bot.invite = bot.links.invite.replace(/(\?|&)permissions=\d+/g, '').replace(/authorize\/?&/, 'authorize?') + '&guild_id=' + config.discord.guildID;
@@ -96,7 +96,7 @@ class Admin extends Route {
 		this.router.get('/certification', this.certificationPerms(), async (req, res) => {
 			let bots = await this.db.getCertificationQueueWithUptime();
 
-			const botStatuses = await this.redis.getStatusMany(bots.map((bot) => bot.id));
+			const botStatuses = bots.length > 0 ? await this.redis.getStatusMany(bots.map((bot) => bot.id)) : [];
 
 			bots = bots.map((bot) => {
 				bot.status = botStatuses[bots.indexOf(bot)] || 'unknown';
@@ -167,7 +167,7 @@ class Admin extends Route {
 
 				let bots = await this.db.findBotsByUsername(req.query.q, (page - 1) * 12, 12);
 
-				const botStatuses = await this.redis.getStatusMany(bots.map((bot) => bot.id));
+				const botStatuses = bots.length > 0 ? await this.redis.getStatusMany(bots.map((bot) => bot.id)) : [];
 
 				bots = bots.map((bot) => {
 					bot.status = botStatuses[bots.indexOf(bot)] || 'unknown';
@@ -189,7 +189,7 @@ class Admin extends Route {
 
 				let bots = await this.db.getAllBotsPaginatedSorted((page - 1) * 12, 12);
 
-				const botStatuses = await this.redis.getStatusMany(bots.map((bot) => bot.id));
+				const botStatuses = bots.length > 0 ? await this.redis.getStatusMany(bots.map((bot) => bot.id)) : [];
 
 				bots = bots.map((bot) => {
 					bot.status = botStatuses[bots.indexOf(bot)] || 'unknown';
@@ -214,7 +214,7 @@ class Admin extends Route {
 
 				let users = await this.db.findUsersByUsernameSorted(req.query.q, (page - 1) * 16, 16);
 
-				const userStatuses = await this.redis.getStatusMany(users.map((user) => user.id));
+				const userStatuses = users.length > 0 ? await this.redis.getStatusMany(users.map((user) => user.id)) : [];
 
 				users = users.map((user) => {
 					user.status = userStatuses[users.indexOf(user)] || 'unknown';
@@ -236,7 +236,7 @@ class Admin extends Route {
 
 				let users = await this.db.getAllUsersPaginatedSorted((page - 1) * 12, 12);
 
-				const userStatuses = await this.redis.getStatusMany(users.map((user) => user.id));
+				const userStatuses = users.length > 0 ? await this.redis.getStatusMany(users.map((user) => user.id)) : [];
 
 				users = users.map((user) => {
 					user.status = userStatuses[users.indexOf(user)] || 'unknown';
@@ -256,7 +256,7 @@ class Admin extends Route {
 		this.router.get('/admins', async (req, res) => {
 			let admins = await this.db.getAdminUsers();
 
-			const userStatuses = await this.redis.getStatusMany(admins.map((user) => user.id));
+			const userStatuses = admins.length > 0 ? await this.redis.getStatusMany(admins.map((user) => user.id)) : [];
 
 			admins = admins.map((user) => {
 				user.status = userStatuses[admins.indexOf(user)] || 'unknown';
@@ -273,7 +273,7 @@ class Admin extends Route {
 		this.router.get('/banned', async (req, res) => {
 			let users = await this.db.getAllBannedUsers();
 
-			const userStatuses = await this.redis.getStatusMany(users.map((user) => user.id));
+			const userStatuses = users.length > 0 ? await this.redis.getStatusMany(users.map((user) => user.id)) : [];
 
 			users = users.map((user) => {
 				user.status = userStatuses[users.indexOf(user)] || 'unknown';

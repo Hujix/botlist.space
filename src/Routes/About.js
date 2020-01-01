@@ -19,7 +19,7 @@ class About extends Route {
 		this.router.get('/about', async (req, res) => {
 			let team = await this.db.getAdminUsers();
 
-			const statuses = await this.redis.getStatusMany(team.map((user) => user.id));
+			const statuses = team.length > 0 ? await this.redis.getStatusMany(team.map((user) => user.id)) : [];
 
 			team = team.map((user) => {
 				user.status = statuses[team.indexOf(user)] || 'unknown';

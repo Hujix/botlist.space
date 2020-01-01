@@ -30,7 +30,7 @@ class User extends Route {
 			let bots = await this.db.getBotsByOwner(user.id);
 
 			if (bots.length > 0) {
-				const botStatuses = await this.redis.getStatusMany(bots.map((bot) => bot.id));
+				const botStatuses = bots.length > 0 ? await this.redis.getStatusMany(bots.map((bot) => bot.id)) : [];
 
 				bots = bots.map((bot) => {
 					bot.status = botStatuses[bots.indexOf(bot)] || 'unknown';

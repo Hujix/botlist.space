@@ -22,7 +22,7 @@ class Bots extends Route {
 
 			let bots = await this.db.getTopBotsByUpvotesPaginated((page - 1) * 12, 12);
 
-			const botStatuses = await this.redis.getStatusMany(bots.map((bot) => bot.id));
+			const botStatuses = bots.length > 0 ? await this.redis.getStatusMany(bots.map((bot) => bot.id)) : [];
 
 			bots = bots.map((bot) => {
 				bot.status = botStatuses[bots.indexOf(bot)] || 'unknown';
@@ -50,7 +50,7 @@ class Bots extends Route {
 
 			let bots = await this.db.getTopBotsByTimestampPaginated((page - 1) * 12, 12);
 
-			const botStatuses = await this.redis.getStatusMany(bots.map((bot) => bot.id));
+			const botStatuses = bots.length > 0 ? await this.redis.getStatusMany(bots.map((bot) => bot.id)) : [];
 
 			bots = bots.map((bot) => {
 				bot.status = botStatuses[bots.indexOf(bot)] || 'unknown';
@@ -78,7 +78,7 @@ class Bots extends Route {
 
 			let bots = await this.db.getCertifiedBotsByIDPaginated((page - 1) * 12, 12);
 
-			const botStatuses = await this.redis.getStatusMany(bots.map((bot) => bot.id));
+			const botStatuses = bots.length > 0 ? await this.redis.getStatusMany(bots.map((bot) => bot.id)) : [];
 
 			bots = bots.map((bot) => {
 				bot.status = botStatuses[bots.indexOf(bot)] || 'unknown';
@@ -110,7 +110,7 @@ class Bots extends Route {
 
 			let bots = await this.db.getApprovedBotsByLibraryPaginated(library.id, (page - 1) * 12, 12);
 
-			const botStatuses = await this.redis.getStatusMany(bots.map((bot) => bot.id));
+			const botStatuses = bots.length > 0 ? await this.redis.getStatusMany(bots.map((bot) => bot.id)) : [];
 
 			bots = bots.map((bot) => {
 				bot.status = botStatuses[bots.indexOf(bot)] || 'unknown';
@@ -142,7 +142,7 @@ class Bots extends Route {
 
 			let bots = await this.db.getApprovedBotsByTagPaginated(tag.id, (page - 1) * 12, 12);
 
-			const botStatuses = await this.redis.getStatusMany(bots.map((bot) => bot.id));
+			const botStatuses = bots.length > 0 ? await this.redis.getStatusMany(bots.map((bot) => bot.id)) : [];
 
 			bots = bots.map((bot) => {
 				bot.status = botStatuses[bots.indexOf(bot)] || 'unknown';

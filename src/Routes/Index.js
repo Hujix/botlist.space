@@ -25,10 +25,10 @@ class Index extends Route {
 			let certified = await this.db.getRandomCertifiedBots(6);
 			let newBots = await this.db.getNewBots(6);
 
-			const topVotedBotStatuses = await this.redis.getStatusMany(topVotedBots.map((bot) => bot.id));
-			const randomBotStatuses = await this.redis.getStatusMany(randomBots.map((bot) => bot.id));
-			const certifiedStatuses = await this.redis.getStatusMany(certified.map((bot) => bot.id));
-			const newBotStatuses = await this.redis.getStatusMany(newBots.map((bot) => bot.id));
+			const topVotedBotStatuses = topVotedBots.length > 0 ? await this.redis.getStatusMany(topVotedBots.map((bot) => bot.id)) : [];
+			const randomBotStatuses = randomBots.length > 0 ? await this.redis.getStatusMany(randomBots.map((bot) => bot.id)) : [];
+			const certifiedStatuses = certified.length > 0 ? await this.redis.getStatusMany(certified.map((bot) => bot.id)) : [];
+			const newBotStatuses = newBots.length > 0 ? await this.redis.getStatusMany(newBots.map((bot) => bot.id)) : [];
 
 			topVotedBots = topVotedBots.map((bot) => {
 				bot.status = topVotedBotStatuses[topVotedBots.indexOf(bot)] || 'unknown';
