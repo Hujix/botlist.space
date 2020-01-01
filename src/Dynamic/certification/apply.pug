@@ -1,0 +1,30 @@
+extends ../layout.pug
+
+block content
+	.jumbotron.secondary-jumbotron.bg-transparent
+		.container
+			h2 Certification Application
+			p Apply below, and we will review your bot for the program.
+	.container
+		form.form(method='post' data-garlic)
+			.form-group
+				label.required(for='bot') Bot
+				select.custom-select#bot(name='bot')
+					option(selected disabled) Select a bot...
+					for bot in bots
+						if bot.certified
+							option(value=bot.id disabled) #{bot.username}##{bot.discriminator} - Bot already certified
+						else if !bot.approved
+							option(value=bot.id disabled) #{bot.username}##{bot.discriminator} - Bot is not approved
+						else
+							option(value=bot.id) #{bot.username}##{bot.discriminator}
+			.form-group
+				label.required(for='purpose') What is your bots purpose?
+				textarea#purpose.form-control(type='text' name='purpose' required)
+			.form-group
+				label.required(for='unique') How is your bot unique?
+				textarea#unique.form-control(type='text' name='unique' required)
+			.form-group
+				label.required(for='website') Website URL
+				input#website.form-control(type='text' name='website')
+			button.btn.btn-dark(type='submit') Submit

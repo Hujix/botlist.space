@@ -1,0 +1,70 @@
+extends ../layout.pug
+
+block tags
+	meta(name='description' content='Sign up for our certification program for a chance to get some sweet perks.')
+	link(rel='canonical' href='https://botlist.space/certification')
+	
+	// Open Graph
+	meta(property='og:title' content='Certification | botlist.space')
+	meta(property='og:description' content='Sign up for our certification program for a chance to get some sweet perks.')
+	meta(property='og:type' content='website')
+	meta(property='og:url' content='https://botlist.space/certification')
+	meta(property='og:image' content='https://botlist.space/img/logo.png')
+
+block scripts
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BreadcrumbList",
+			"itemListElement": [
+				{
+					"@type": "ListItem",
+					"position": 1,
+					"name": "Home",
+					"item": "https://botlist.space/"
+				},
+				{
+					"@type": "ListItem",
+					"position": 2,
+					"name": "Certification",
+					"item": "https://botlist.space/certification"
+				}
+			]
+		}
+
+block content
+	.jumbotron.secondary-jumbotron.bg-transparent
+		.container
+			h2 Certification Program
+			p Sign up for our certification program for a chance to get some sweet perks.
+	.container
+		.header-container-single
+			img(src='/img/certified.svg' draggable='false' alt='Certified')
+			h2 What is the Certification Program?
+		p.mb-20 From our small community startup in 2017, we've made it our goal to make the Discord experience more seamless. Finding your bot shouldn't be a challenge for users, and it shouldn't be a challenge for you to get your bot found either. Our certification program offers developers of quality bots a way to boost their growth while still allowing them to focus on developing their bot. It's a win-win. Developers of quality bots get their bots promoted and users looking for bots get to the quality bots faster.
+		h3 Requirements
+		p.md-20 Your bot must meet the following requirements to be eligible for our certification program. We have these requirements to ensure that only quality bots get into the program.
+		ul
+			li Have been listed on botlist.space for atleast one week
+			li &gt;= 95% uptime
+			li A high quality avatar
+			li A website or GitHub repository with ample documentation
+			li Original features
+			li A well setup support server
+			li A neatly organized, informative long description (just linking to your website does not count)
+		h3 Perks
+		p.md-20 Being certified has its perks:
+		ul
+			li
+				b Access to usage of HTML on your bot page
+			li A custom background for your bot card on the list pages
+			li A fancy certification badge for both you and your bot
+			li Become eligible to be featured in the Certified Bots section on the home page
+			li Be listed on our Certified Bots page
+			li Access to beta features on the site
+			li Access to our Certified Developer only channels
+			li Certified role for both you and your bot in the official server
+		h3 Application
+		p.md-20
+			a(href='/certification/apply') Click here
+			|  to apply for certification.

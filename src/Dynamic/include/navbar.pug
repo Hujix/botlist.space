@@ -1,0 +1,40 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-transparent
+	.container
+		button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbar' aria-controls='navbar' aria-expanded='false' aria-label='Toggle navigation')
+			span.navbar-toggler-icon
+		#navbar.collapse.navbar-collapse
+			ul.navbar-nav.navbar-left
+				if navPage === 0
+					li.nav-item.active
+						a.nav-link(href='/') Home
+				else
+					li.nav-item
+						a.nav-link(href='/') Home
+				if navPage === 1
+					li.nav-item.active
+						a.nav-link(href='/bots') Bots
+				else
+					li.nav-item
+						a.nav-link(href='/bots') Bots
+				li.nav-item
+					a.nav-link(href='https://serverlist.space' target='_blank' rel='noreferrer') Servers
+			ul.navbar-nav.navbar-middle
+				li.nav-item
+					a.navbar-brand
+						img(src='/img/logo.svg' draggable='false' alt='botlist.space Logo')
+			ul.navbar-nav.navbar-right
+				li.nav-item
+					a.nav-link(href='/server') Join Server
+				if user
+					li.nav-item.dropdown
+						a#user-dropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') #{user.username}##{user.discriminator}
+						.dropdown-menu.hoverable.inherit-width(aria-labelledby='user-dropdown')
+							a.dropdown-item(href='/user/' + user.id) My profile
+							a.dropdown-item(href='/add' rel='nofollow') Add bot
+							a.dropdown-item(href='/user/' + user.id + '/settings') Settings
+							if user.admin
+								a.dropdown-item(href='/admin') Admin panel
+							.dropdown-divider
+							a.dropdown-item(href='/auth/logout') Log out
+				else
+					a.btn.btn-outline-secondary.my-2.my-sm-0(href='/auth') Login

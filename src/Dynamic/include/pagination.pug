@@ -1,0 +1,42 @@
+nav.mb-35(aria-label='Page navigation example')
+	ul.pagination.justify-content-center
+		if currentPage === 1
+			li.page-item.disabled
+				a.page-link(href='#' tabindex='-1') Previous
+			li.page-item
+				a.page-link.active(href='?page=' + currentPage) #{currentPage}
+			if pages > currentPage
+				li.page-item
+					a.page-link(href='?page=' + (currentPage + 1)) #{currentPage + 1}
+			if pages > currentPage + 1
+				li.page-item
+					a.page-link(href='?page=' + (currentPage + 2)) #{currentPage + 2}
+			if pages > currentPage
+				li.page-item
+					a.page-link(href='?page=' + (currentPage + 1)) Next
+			else
+				li.page-item.disabled
+					a.page-link(href='?page=' + (currentPage + 1)) Next
+		else if currentPage === pages
+			li.page-item
+				a.page-link(href='?page=' + (currentPage - 1) tabindex='-1') Previous
+			if pages > 2
+				li.page-item
+					a.page-link(href='?page=' + (currentPage - 2)) #{currentPage - 2}
+			li.page-item
+				a.page-link(href='?page=' + (currentPage - 1)) #{currentPage - 1}
+			li.page-item
+				a.page-link.active(href='?page=' + currentPage) #{currentPage}
+			li.page-item.disabled
+				a.page-link(href='#') Next
+		else
+			li.page-item
+				a.page-link(href='?page=' + (currentPage - 1) tabindex='-1') Previous
+			li.page-item
+				a.page-link(href='?page=' + (currentPage - 1)) #{currentPage - 1}
+			li.page-item
+				a.page-link.active(href='?page=' + currentPage) #{currentPage}
+			li.page-item
+				a.page-link(href='?page=' + (currentPage + 1)) #{currentPage + 1}
+			li.page-item
+				a.page-link(href='?page=' + (currentPage + 1)) Next

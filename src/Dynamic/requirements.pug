@@ -1,0 +1,75 @@
+extends layout.pug
+
+block tags
+	meta(name='description' content='The listing requirements to get your bot on, and continue to stay on our site.')
+	link(rel='canonical' href='https://botlist.space/add/requirements')
+	
+	// Open Graph
+	meta(property='og:title' content='Listing Requirements | botlist.space')
+	meta(property='og:description' content='The listing requirements to get your bot on, and continue to stay on our site.')
+	meta(property='og:type' content='website')
+	meta(property='og:url' content='https://botlist.space/add/requirements')
+	meta(property='og:image' content='https://botlist.space/img/logo.png')
+
+block content
+	.jumbotron.secondary-jumbotron.bg-transparent
+		.container
+			h2 Listing Requirements
+			p The listing requirements to get your bot on, and continue to stay on our site.
+	.container
+		ol
+			li
+				b Does the bot have a variety of commands?
+				ul
+					li Your bot must have a unique variety of commands. If your bot is multipurpose, you must have more than 12 commands in total, not all under the same category. If your bot is only used for one purpose (e.g. applying roles on re-joining a server), then the command limit may be reduced.
+			li
+				b Does the bot respond to commands?
+				ul
+					li
+						| If a bot does not respond to a 
+						i few
+						|  commands, that is fine, but if the bot is not responding to about half of the commands, then there is a problem and should be denied. If the bot is not online, then contact the owner in DM or in a channel. If the owner is not in the server, then the bot will be denied.
+			li
+				b Quality over quantity
+				ul
+					li The bot developer should spend time making the commands respond, and look easy to use instead of rushing to provide 80+ commands. The bot must be somewhat easy to use, and function as described.
+			li
+				b Large inconsistencies that make it hard for users to use
+				ul
+					li Every bot that passes through our verification phase must be able to be understood by the user. If there are large inconsistencies that prevent the bot from being used, there is an issue and the bot would be denied.
+			li
+				b NSFW inside non-NSFW channels
+				ul
+					li
+						| If you own a bot that provides data or images from other locations beyond Discord (like but not limited to Google, Google Images, or Urban Dictionary), then you should review these commands to make sure they cannot send the content into a non-NSFW channel. If the source of the command can provide a filter to prevent bad links (like Google SafeSearch),  make sure it prevents nasty links like pornographic sites. If there is no filter for a source, or the safe filter is not turned on, then the command should be restricted to NSFW channels 
+						b ONLY
+						| . If the bot does not restrict this, the bot is an instant deny. And yes, text can be considered NSFW too.
+			li
+				b Spamming
+				ul
+					li Some bots like to do repetitive tasks like posting memes on a scheduled time. If this becomes an issue where users 
+						i could possibly
+						|  complain, then the bot will be denied.
+			li
+				b Non-configurable swear/ad filters
+				ul
+					li If your bot has an automatic swear or ad filter, and cannot be configured to turn this off, then we will do our best to contact you. If you do not respond within 24 hours, or you are unable to be contacted, then the bot will be denied.
+			li
+				b Common reasons for denial
+				ul
+					li Not enough features/commands
+					li Mass DM feature
+					li Large inconsistencies that affect usage
+					li Bot was offline after 24 hours, failed to contact owner
+					li Bot doesn't respond to help, commands or cmds
+					li A large portion of commands do not work, or don't respond at all (when used incorrectly too)
+					li NSFW content works in SFW channels
+					li The bot is a clone of someone else's work
+			li
+				b Uptime
+				ul
+					li Each bot that is accepted into the site must stay above an 85% uptime in order to stay listed. The bot will automatically track the uptime of all the bots listed, and perform a mandatory prune at the end of the month. After the prune each month, the uptime data will be cleared and each bot is given a clean slate. Your bot will be exempt from the prune if it has been listed for less than 30 days. Once your bot has been listed for over one month, it will be checked for uptime and potentially deleted.
+			li
+				b Other issues
+				ul
+					li Some bots may not be perfect, but it is up to the staff to choose whether it should be accepted or not. If your bot was declined because of a reason that was not listed here, and you think the decline was false, then you can contact any staff in our server.

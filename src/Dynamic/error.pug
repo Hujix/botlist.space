@@ -1,0 +1,18 @@
+extends layout.pug
+
+block tags
+	meta(name='description' content=message)
+	link(rel='canonical' href='https://botlist.space/')
+	
+	// Open Graph
+	meta(property='og:title' content=code + ' | botlist.space')
+	meta(property='og:description' content=message)
+	meta(property='og:type' content='website')
+	meta(property='og:url' content='https://botlist.space/')
+	meta(property='og:image' content='https://botlist.space/img/logo.png')
+
+block content
+	.jumbotron.main-jumbotron.bg-transparent
+		.container
+			h1 #{code || 'Oops!'}
+			p #{message || 'Something happened with your request. Please try again.'}

@@ -1,0 +1,50 @@
+.bot-card img.main-image {
+	filter: none !important;
+}
+
+.card {
+	background-color: #000000 !important;
+}
+
+.card:not(.background) {
+	border: 1px solid #262626 !important;
+}
+
+.dropdown-menu {
+	background: #000000 !important;
+	border: 1px solid #262626 !important;
+}
+
+body {
+	background: #101010 !important;
+}
+
+img.background {
+	display: none;
+}
+
+.large-search {
+	background: #202020;
+	color: #eeeeee;
+}
+
+.large-search:focus {
+	background: #303030;
+	color: #ffffff;
+}
+
+.btn-light {
+	background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-light:focus {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-light:hover {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+.btn-light:not(:disabled):not(.disabled):active, .btn-light:not(:disabled):not(.disabled).active, .show>.btn-light.dropdown-toggle {
+	background-color: rgba(255, 255, 255, 0.4) !important;
+}

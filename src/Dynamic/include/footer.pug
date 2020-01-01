@@ -1,0 +1,33 @@
+footer.footer
+	.container
+		.row
+			.col-lg-3.col-md-3.col-sm-12.center-mobile.mb-3-mobile
+				span &copy; 2019 botlist.space
+				span.vertical-split
+				span(title='Time to fulfill request') #{Date.now() - start}ms
+			.col-lg-9.col-md-9.col-sm-12.text-right.center-mobile
+				if footerPage === 0
+					a.dotted-underline(href='/about') About
+				else
+					a(href='/about') About
+				span.vertical-split
+				a(href='https://twitter.com/botlistspace' target='_blank' rel='noreferrer') Twitter
+				span.vertical-split
+				a(href='https://www.patreon.com/botlistspace' target='_blank' rel='noreferrer') Patreon
+				span.vertical-split
+				a(href='https://docs.botlist.space' target='_blank' rel='noreferrer') API
+				span.vertical-split
+				if footerPage === 1
+					a.dotted-underline(href='/certification') Certification
+				else
+					a(href='/certification') Certification
+				span.vertical-split
+				if footerPage === 2
+					a.dotted-underline(href='/terms') Terms
+				else
+					a(href='/terms') Terms
+				|  and 
+				if footerPage === 3
+					a.dotted-underline(href='/privacy') Privacy
+				else
+					a(href='/privacy') Privacy

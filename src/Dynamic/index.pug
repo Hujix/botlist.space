@@ -1,0 +1,94 @@
+extends layout.pug
+
+block tags
+	meta(name='description' content='Explore hundreds of Discord bots in our bot list for your next big server using our large selection of popular bots.')
+	link(rel='canonical' href='https://botlist.space/')
+	
+	// Open Graph
+	meta(property='og:title' content=title + ' | botlist.space')
+	meta(property='og:description' content='Explore hundreds of Discord bots in our bot list for your next big server using our large selection of popular bots.')
+	meta(property='og:type' content='website')
+	meta(property='og:url' content='https://botlist.space/')
+	meta(property='og:image' content='https://botlist.space/img/logo.png')
+
+block scripts
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BreadcrumbList",
+			"itemListElement": [
+				{
+					"@type": "ListItem",
+					"position": 1,
+					"name": "Home",
+					"item": "https://botlist.space/"
+				}
+			]
+		}
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "WebSite",
+			"url": "https://botlist.space/",
+			"potentialAction": {
+				"@type": "SearchAction",
+				"target": "https://botlist.space/search?q={search}",
+				"query-input": "required name=search"
+			}
+		}
+
+block content
+	img.background(src='/img/background' + (user && user.style === 1 ? '-dark' : '') + '.svg' alt='Background splash')
+	.jumbotron.main-jumbotron.bg-transparent
+		.container
+			h1 botlist.space
+			label(for='search') Explore hundreds of Discord bots for your next big server.
+			form(action='/search')
+				input.form-control.large-search#search(type='text' name='q' placeholder='Search for something great...' autofocus)
+			.button-list-mr-20.mt-5
+				for tag in topTags
+					a.btn.btn-light.quick-tag(href='/bots/tag/' + tag.short width='40' height='40')
+						if tag.icon
+							img.mr-1(src=tag.icon alt=tag.name)
+						span #{tag.name}
+				a.btn.btn-light.quick-tag(href='/tags') More Tags
+	.padded-container
+		a.header-container.no-color(href='/bots')
+			img(src='/img/leveling.svg' draggable='false' alt='Upvote')
+			h2 Top Voted Bots
+			p.mb-20 Discover this month's top voted bots.
+		ul.row.bot-list
+			for bot in topVotedBots
+				li.col-lg-4.col-md-6.col-sm-12
+					include include/bot-card.pug
+		a.header-container.no-color(href='/bots/certified')
+			img(src='/img/certified.svg' draggable='false' alt='Certified')
+			h2 Certified Bots
+			p.mb-20 Find unique bots that fit into our certification program.
+		ul.row.bot-list
+			for bot in certified
+				li.col-lg-4.col-md-6.col-sm-12
+					include include/bot-card.pug
+		a.header-container.no-color(href='/bots/new')
+			img(src='/img/analytics.svg' draggable='false' alt='Upvote')
+			h2 New Bots
+			p.mb-20 Hot off the press bots that were just recently approved.
+		ul.row.bot-list
+			for bot in newBots
+				li.col-lg-4.col-md-6.col-sm-12
+					include include/bot-card.pug
+		.header-container
+			img(src='/img/fun.svg' draggable='false' alt='Upvote')
+			h2 Random Bots
+			p.mb-20 Randomly picked bots from our list.
+		ul.row.bot-list
+			for bot in randomBots
+				li.col-lg-4.col-md-6.col-sm-12
+					include include/bot-card.pug
+	.container
+		h2 Why choose us?
+		p botlist.space is dedicated to provide a seamless and minimalist experience while searching for Discord bots. We release new features almost daily, and are always willing to go the extra mile. All of the bots listed here come from Discord users just like you who want to spice up their Discord community. Every bot on our site undergoes a strict and thorough inspection before becoming listed to ensure that these bots are the best of the best.
+		p
+			| Can't find what you're looking for? No problem, our moderators are always willing to help out in any way possible. If you need any assistance at all, hop on over to our 
+			a(href='/server') official Discord server
+			|  and ping one of our staff.

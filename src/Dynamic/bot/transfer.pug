@@ -1,0 +1,27 @@
+extends ../layout.pug
+
+block content
+	.jumbotron.bg-transparent.bot-card
+		.container
+			.row
+				.col-lg-3
+					if bot.avatar_child_friendly
+						img.main-image(src=avatarURL(bot) onerror=onerror alt=bot.username + '\'s Avatar')
+					else
+						img.main-image.blur(src=avatarURL(bot) onerror=onerror draggable='false' alt=bot.username + '\'s Avatar')
+				.col-lg-9
+					.vertical-align
+						span.card-title
+							h1 #{bot.username}
+							span(class='status ' + bot.status title=bot.status.charAt(0).toUpperCase() + bot.status.slice(1))
+						p.mb-5 #{bot.short_description}
+			hr
+			form.form(method='post')
+				.form-group
+					label(for='owner') New Owner ID
+					input#owner.form-control(type='text' name='user')
+				.form-group
+					.form-check
+						input#agree.form-check-input(type='checkbox' name='agree')
+						label.form-check-label(for='agree') I am certain that I want to transfer bot ownership, and also acknowledge that transferring a bot will remove all secondary owners as well.
+				button.btn.btn-dark.btn-red(type='submit') Transfer Bot

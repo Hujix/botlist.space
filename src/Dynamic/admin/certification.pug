@@ -1,0 +1,46 @@
+extends ../layout.pug
+
+block content
+	.jumbotron.secondary-jumbotron.bg-transparent
+		.container
+			h1 Certification Queue
+			p Certification applications that are needing review.
+	.container
+		if bots.length > 0
+			ul.bot-list
+				for bot in bots
+					li.card.preview-card
+						.card-body
+							.head
+								if bot.bot.avatar_child_friendly
+									img.float-left.lazy(src=avatarURL() data-src=avatarURL(bot) onerror=onerror alt='Avatar for ' + bot.bot.username draggable='false')
+								else
+									img.float-left.blur.lazy(src=avatarURL() data-src=avatarURL(bot) onerror=onerror alt='Avatar for ' + bot.bot.username draggable='false')
+								.content
+									h3(title=bot.bot.username)
+										span #{bot.bot.username}
+									p.description(title=bot.bot.short_description) #{bot.bot.short_description}
+							p.mt-3.mb-2
+								| Prefix: 
+								code.border.pt-1.pb-1.pl-2.pr-2 #{bot.bot.prefix}
+							p.mb-2
+								span.font-weight-bold Purpose: 
+								| #{bot.purpose}
+							p.mb-2
+								span.font-weight-bold Uniqueness: 
+								| #{bot.unique}
+							p.mb-2
+								span.font-weight-bold Website URL: 
+								a(href=bot.website target='_blank') #{bot.website}
+							p.mb-2
+								span.font-weight-bold Owners: 
+								| #{bot.bot.owners.map((owner) => owner.username + '#' + owner.discriminator).join(', ')}
+							p.mb-2
+								span.font-weight-bold Uptime: 
+								| #{((bot.uptime.online / bot.uptime.total) * 100).toFixed(1)}%
+							a.btn.btn-dark.mr-1(href='/bot/' + bot.bot.id target='_blank') View
+							a.btn.btn-dark.mr-1(href=bot.bot.links.invite target='_blank') Invite
+							a.btn.btn-dark.btn-green.mr-1(href='/admin/certification/' + bot.bot.id + '/accept') Approve
+							a.btn.btn-dark.btn-red.mr-1(href='/admin/certification/' + bot.bot.id + '/decline') Decline
+		else
+			p.text-center There doesn't seem to be any bots here.

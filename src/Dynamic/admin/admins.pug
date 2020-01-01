@@ -1,0 +1,15 @@
+extends ../layout.pug
+
+block content
+	.jumbotron.secondary-jumbotron.bg-transparent
+		.container
+			h2 Admins
+			p All of the staff on our site.
+	.padded-container
+		if users.length
+			.row
+				for usr in users
+					.col-lg-4.col-md-6.col-sm-12
+						include ../include/user-card.pug
+		else
+			p.text-center There doesn't seem to be any users here.

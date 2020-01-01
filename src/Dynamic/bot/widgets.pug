@@ -1,0 +1,46 @@
+extends ../layout.pug
+
+block scripts
+    script(type='text/javascript' src='/js/widgets' + min + '.js')
+
+block content
+    .jumbotron.secondary-jumbotron.bg-transparent
+        .container
+            h2 Widgets
+            p Small image cards that you can place anywhere to show off your bot.
+    .container
+        h2 What are widgets?
+        p Widgets are small image cards that can be placed anywhere - other bot lists, your website, and even GitHub - that link to your bot page here at botlist.space. It provides detailed information about your bot, while still staying minimalist. There are many styles to choose from, so pick one that best fits your bot and roll with it.
+        h2 Configuration
+        p
+            | You can optionally append query parameters to the end of your widget image URL to change how it looks. All of the configurable parameters are listed below. Note, that if you have more than 1 query parameter used, every ? symbol after the first one will need to be a &amp; symbol instead. For example: 
+            br
+            code.border ?rounded=true&amp;shadows=false
+        ul
+            li
+                code.border ?rounded=&lt;true/false&gt;
+            li
+                code.border ?shadows=&lt;true/false&gt;
+        h2 Styles
+        for style in [1, 2, 3, 4, 5, 6]
+            .card.preview-card
+                .card-body
+                    .row
+                        .col-lg-4
+                            img.full-width.mb-2(src='https://api.botlist.space/widget/' + bot.id + '/' + style alt='Widget Style #' + style + ' for ' + bot.username)
+                        .col-lg-8
+                            .row
+                                .col-lg-6.col-md-12
+                                    p HTML
+                                    pre.border.pt-1.pb-1.pl-2.pr-2
+                                        code
+                                            | &lt;a href="https://botlist.space/bot/#{bot.id}?utm_source=bls&amp;utm_medium=widget&amp;utm_campaign=#{bot.id}"&gt;
+                                            |     &lt;img src="https://api.botlist.space/widget/#{bot.id}/#{style}"&gt;
+                                            | &lt;/a&gt;
+                                    button.btn.btn-dark.copy Copy HTML
+                                .col-lg-6.col-md-12
+                                    p Markdown
+                                    pre.border.pt-1.pb-1.pl-2.pr-2
+                                        code
+                                            | [![#{bot.username}'s Widget](https://api.botlist.space/widget/#{bot.id}/#{style} "#{bot.username}'s Widget")](https://botlist.space/bot/#{bot.id}?utm_source=bls&amp;utm_medium=widget&amp;utm_campaign=#{bot.id})
+                                    button.btn.btn-dark.copy Copy Markdown

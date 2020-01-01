@@ -1,0 +1,20 @@
+extends ../layout.pug
+
+block content
+	.jumbotron.bg-transparent.bot-card
+		.container
+			.row
+				.col-lg-3
+					img.full-width(src=avatarURL(usr) onerror=onerror alt=usr.username + '\'s Avatar')
+				.col-lg-9
+					.vertical-align
+						span.card-title
+							h1 #{usr.username}##{usr.discriminator}
+							span(class='status ' + usr.status title=usr.status.charAt(0).toUpperCase() + usr.status.slice(1))
+						p.mb-5 #{usr.short_description || 'This user prefers to keep their biography a mystery. 👻'}
+			hr
+			form.form(method='post')
+				.form-group
+					label(for='shortDescription') Reason
+					input#shortDescription.form-control(type='text' name='reason')
+				button.btn.btn-dark.btn-red(type='submit') Ban User

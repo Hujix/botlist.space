@@ -1,0 +1,56 @@
+extends ../layout.pug
+
+block content
+	.jumbotron.secondary-jumbotron.bg-transparent
+		.container
+			h1 Administration Panel
+			p Manage the site.
+	.container
+		.row
+			.col-lg-4
+				a.no-color(href='/admin/queue')
+					.card.action-card
+						.card-body
+							h2 Queue
+			if user.developer || user.certification
+				.col-lg-4
+					a.no-color(href='/admin/certification')
+						.card.action-card
+							.card-body
+								h2 Certification Queue
+			.col-lg-4
+				a.no-color(href='/admin/bots')
+					.card.action-card
+						.card-body
+							h2 Bot Lookup
+			.col-lg-4
+				a.no-color(href='/admin/users')
+					.card.action-card
+						.card-body
+							h2 User Lookup
+			.col-lg-4
+				a.no-color(href='/admin/libraries')
+					.card.action-card
+						.card-body
+							h2 Libraries
+			.col-lg-4
+				a.no-color(href='/admin/admins')
+					.card.action-card
+						.card-body
+							h2 Admins
+			.col-lg-4
+				a.no-color(href='/admin/banned')
+					.card.action-card
+						.card-body
+							h2 Banned Users
+			.col-lg-4
+				a.no-color(href='/admin/uptime')
+					.card.action-card
+						.card-body
+							h2 Uptime
+			if user.developer
+				.col-lg-4
+					a.no-color(href='/admin/jobs')
+						.card.action-card
+							.card-body
+								h2 Jobs

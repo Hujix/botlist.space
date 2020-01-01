@@ -1,0 +1,41 @@
+{
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaVersion": 2019
+    },
+    "rules": {
+        "indent": [
+            "error",
+            "tab"
+        ],
+        "linebreak-style": "off",
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "require-atomic-updates": "off"
+    },
+    "overrides": [
+        {
+            "files": "src/Static/**/*",
+            "env": {
+                "browser": true
+            },
+            "rules": {
+                "no-console": "off"
+            }
+        }
+    ],
+    "ignorePatterns": [
+        "src/Static/**/*.min.*"
+    ]
+}

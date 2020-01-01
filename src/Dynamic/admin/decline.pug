@@ -1,0 +1,42 @@
+extends ../layout.pug
+
+block scripts
+	script(type='text/javascript' src='/js/reason' + min + '.js')
+
+block content
+	.jumbotron.bg-transparent.bot-card
+		.container
+			.row
+				.col-lg-3
+					if bot.avatar_child_friendly
+						img.full-width(src=avatarURL(bot) onerror=onerror alt=bot.username + '\'s Avatar')
+					else
+						img.full-width.blur(src=avatarURL(bot) onerror=onerror draggable='false' alt=bot.username + '\'s Avatar')
+				.col-lg-9
+					.vertical-align
+						span.card-title
+							h1 #{bot.username}
+						p.description.mb-5 #{bot.short_description}
+			hr
+			form.form(method='post')
+				.form-group
+					label(for='reason') Reason
+					select.form-control#quick-reason
+						option(selected disabled) Select a quick reason...
+						option Invite URL does not work
+						option The bot lacks features, or does not meet the required command count of 12
+						option Bot does not respond to a majority of the commands
+						option Unescaped everyone/here mentions in command responses
+						option Owner's account is deleted
+						option Bot has a non-configurable global ban list
+						option Bot was offline for an extended period of time, unable to check bot
+						option Commands listed are too basic
+						option NSFW commands work in a non-NSFW channel
+						option Some commands require elevated permission levels that seem too excessive
+						option Clone of an open source bot
+						option Command list or argument documentation is confusing
+						option Bot is in a language that none of our staff can currently test
+						option(disabled) &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+						option(data-other) Other reason
+					input#reason.form-control(type='text' name='reason' placeholder='Reason' style='visibility: hidden; height: 0; margin: 0;')
+				button.btn.btn-dark.btn-red.no-corners(type='submit') Decline Bot

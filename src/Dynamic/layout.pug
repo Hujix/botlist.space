@@ -1,0 +1,50 @@
+doctype html
+html(lang='en')
+	head
+		title #{title} | botlist.space
+
+		// Misc
+		meta(http-equiv='Content-Type' content='text/html; charset=utf-8')
+
+		// CSS
+		link(rel='stylesheet' href='/css/bootstrap.min.css')
+		link(rel='stylesheet' href='/css/style' + min + '.css')
+		if user && parseInt(user.style) && parseInt(user.style) in styleMap
+			for requirement in styleMap[parseInt(user.style)].requires
+				if requirement in styleMap
+					link(rel='stylesheet' href='/css/themes/' + styleMap[requirement].file + min + '.css')
+			link(rel='stylesheet' href='/css/themes/' + styleMap[parseInt(user.style)].file + min + '.css')
+		block styles
+
+		if user && user.custom_css && user.custom_css.length > 0
+			// Custom CSS
+			style #{user.custom_css}
+
+		// Mobile Compatibility
+		meta(name='viewport' content='width=device-width, initial-scale=1')
+		meta(name='theme-color' content='#222222')
+		link(rel='apple-touch-icon' sizes='180x180' href='/img/apple-touch-icon.png')
+		link(rel='icon' type='image/png' sizes='32x32' href='/img/favicon-32x32.png')
+		link(rel='icon' type='image/png' sizes='16x16' href='/img/favicon-16x16.png')
+		link(rel='manifest' href='/site.webmanifest')
+		link(rel='mask-icon' href='/img/safari-pinned-tab.svg' color='#252525')
+		link(rel='shortcut icon' href='/favicon.ico')
+		meta(name='msapplication-TileColor' content='#ffffff')
+		meta(name='msapplication-TileImage' content='/img/mstile-144x144.png')
+		meta(name='msapplication-config' content='/browserconfig.xml')
+		meta(name='theme-color' content='#ffffff')
+
+		// SEO
+		meta(name='robots' content='index, follow')
+		block tags
+	body(data-theme=(user ? user.style || '0' : '0') class=(showBackground ? 'background' : null))
+		include include/navbar.pug
+
+		main
+			block content
+
+		include include/footer.pug
+		// JS
+		script(type='text/javascript' src='/js/bootstrap.min.js')
+		script(type='text/javascript' src='/js/main' + min + '.js')
+		block scripts

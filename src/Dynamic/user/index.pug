@@ -1,0 +1,72 @@
+extends ../layout.pug
+
+block tags
+	meta(name='description' content=usr.short_description || 'This user prefers to keep their biography a mystery. 👻')
+	link(rel='canonical' href='https://botlist.space/user/' + usr.id)
+	
+	// Open Graph
+	meta(property='og:title' content=usr.username + '#' + usr.discriminator + ' | botlist.space')
+	meta(property='og:description' content=usr.short_description || 'This user prefers to keep their biography a mystery. 👻')
+	meta(property='og:type' content='website')
+	meta(property='og:url' content='https://botlist.space/user/' + usr.id)
+	meta(property='og:image' content=avatarURL(usr))
+
+block scripts
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BreadcrumbList",
+			"itemListElement": [
+				{
+					"@type": "ListItem",
+					"position": 1,
+					"name": "Home",
+					"item": "https://botlist.space/"
+				},
+				{
+					"@type": "ListItem",
+					"position": 2,
+					"name": "User",
+					"item": "https://botlist.space/user"
+				},
+				{
+					"@type": "ListItem",
+					"position": 2,
+					"name": "#{usr.username}##{usr.discriminator}",
+					"item": "https://botlist.space/user/#{usr.id}"
+				}
+			]
+		}
+
+block content
+	.jumbotron.bg-transparent.bot-card
+		.container
+			if usr.banned
+				.alert.alert-danger(role='alert')
+					| This user has been banned on #{usr.bannedAt} for: 
+					span.bold #{usr.banReason}
+			.row
+				.col-lg-3.col-md-4.col-sm-6.col-6
+					img.main-image(src=avatarURL(usr) onerror=onerror alt=usr.username + '\'s Avatar')
+				.col-lg-9.col-md-6.col-sm-12
+					.vertical-align
+						span.card-title
+							h1 #{usr.username}##{usr.discriminator}
+							span(class='status ' + usr.status title=usr.status.charAt(0).toUpperCase() + usr.status.slice(1))
+						p.mb-5 #{usr.short_description || 'This user prefers to keep their biography a mystery. 👻'}
+						if user && (user.admin || usr.id === user.id)
+							.row.data
+								.col-lg-6
+									p Links
+									ul
+										if usr.website
+											li
+												a(href=usr.website target='_blank') Website
+										li
+											a(href='/user/' + usr.id + '/manage') Manage
+	.padded-container
+		h1 Bots
+		ul.row.bot-list
+			for bot in bots
+				li.col-lg-4.col-md-6.col-sm-12
+					include ../include/bot-card.pug

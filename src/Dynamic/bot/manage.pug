@@ -1,0 +1,54 @@
+extends ../layout.pug
+
+block content
+	.jumbotron.secondary-jumbotron.bg-transparent
+		.container
+			h1 Manage Bot
+			p Make modifications to your bot, or view the audit log
+	.container
+		.row
+			.col-lg-4
+				a.no-color(href='/bot/' + bot.id + '/edit')
+					.card.action-card
+						.card-body
+							h2 Edit Bot
+			.col-lg-4
+				a.no-color(href='/bot/' + bot.id + '/widget')
+					.card.action-card
+						.card-body
+							h2 Widgets
+			.col-lg-4
+				a.no-color(href='/bot/' + bot.id + '/badges')
+					.card.action-card
+						.card-body
+							h2 Badges
+			.col-lg-4
+				a.no-color(href='/bot/' + bot.id + '/analytics')
+					.card.action-card
+						.card-body
+							h2 Analytics
+			.col-lg-4
+				a.no-color(href='/bot/' + bot.id + '/token')
+					.card.action-card
+						.card-body
+							h2 Bot Token
+			.col-lg-4
+				a.no-color(href='/bot/' + bot.id + '/audit')
+					.card.action-card
+						.card-body
+							h2 Audit Log
+			.col-lg-4
+				a.no-color(href='/bot/' + bot.id + '/uptime')
+					.card.action-card
+						.card-body
+							h2 Uptime
+			.col-lg-4
+				a.no-color(href='/bot/' + bot.id + '/delete')
+					.card.action-card
+						.card-body
+							h2 Delete Bot
+			.col-lg-4
+				a.no-color(href='/bot/' + bot.id + '/transfer')
+					.card.action-card
+						.card-body
+							h2 Transfer Ownership

@@ -1,0 +1,19 @@
+extends ../layout.pug
+
+block content
+	.jumbotron.secondary-jumbotron.bg-transparent
+		.container
+			h2 Bots
+			p Navigate quickly through bots.
+			form
+				input.form-control.large-search.mb-40(type='text' name='q' value=search placeholder='Search for bots...')
+	.container
+		include ../include/pagination.pug
+	.padded-container
+		if bots.length
+			ul.row.bot-list
+				for bot in bots
+					li.col-lg-4.col-md-6.col-sm-12
+						include ../include/bot-card.pug
+		else
+			p.text-center There doesn't seem to be any bots here.

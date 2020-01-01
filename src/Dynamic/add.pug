@@ -1,0 +1,155 @@
+extends layout.pug
+
+block tags
+	meta(name='description' content='Fill out a form to quickly get your bot added on our site.')
+	link(rel='canonical' href='https://botlist.space/add')
+	
+	// Open Graph
+	meta(property='og:title' content='Add Bot | botlist.space')
+	meta(property='og:description' content='Fill out a form to quickly get your bot added on our site.')
+	meta(property='og:type' content='website')
+	meta(property='og:url' content='https://botlist.space/add')
+	meta(property='og:image' content='https://botlist.space/img/logo.png')
+
+block scripts
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BreadcrumbList",
+			"itemListElement": [
+				{
+					"@type": "ListItem",
+					"position": 1,
+					"name": "Home",
+					"item": "https://botlist.space/"
+				},
+				{
+					"@type": "ListItem",
+					"position": 2,
+					"name": "Add Bot",
+					"item": "https://botlist.space/add"
+				}
+			]
+		}
+	script(type='text/javascript' src='/js/codemirror.min.js')
+	script(type='text/javascript' src='/js/markdown.min.js')
+	script(type='text/javascript' src='/js/markdown-it.min.js')
+	script(type='text/javascript' src='/js/edit' + min + '.js')
+
+block styles
+	link(rel='stylesheet' href='/css/github-markdown.min.css')
+	link(rel='stylesheet' href='/css/codemirror.min.css')
+	if user.style === 1
+		link(rel='stylesheet' href='/css/darcula.min.css')
+
+block content
+	.jumbotron.secondary-jumbotron.bg-transparent
+		.container
+			h2 Add Bot
+			p Fill out this form to get your bot submitted to the site.
+	.container
+		.alert.alert-warning(role='alert')
+			| Please ensure that your bot 
+			a(href='/add/requirements' target='_blank') follows our requirements
+			|  to make the verification period as quick and seamless as possible.
+		.alert.alert-success(role='alert')
+			| We recommend that you join our 
+			a(href='/server' target='_blank') official Discord server
+			|  so you can be notified of when your bot is approved/denied, along with other important announcements we provide.
+		form.form(method='post' data-garlic)
+			.form-group
+				label.required(for='id') Client ID
+				input#id.form-control.validate(type='text' aria-describedby='idHelp' name='id' data-min='16' data-max='20' required)
+				span.validation.invisible 0/16-20
+			.form-group
+				label.required(for='shortDescription') Short Description
+				input#shortDescription.form-control.validate(type='text' name='short_description' data-min='1' data-max='180' required)
+				span.validation.invisible 0/1-180
+			.form-group.description
+				label(for='fullDescription') Full Description
+				.row
+					.col-lg-6
+						textarea#fullDescription.form-control.validate(type='text' aria-describedby='fullDescriptionHelp' name='full_description' data-max='15000')
+					.col-lg-6
+						.card.card-body.no-corners.preview-desc.markdown-body
+				small#fullDesciptionHelp.form-text The full description supports Markdown only. HTML is restricted to certified users only. Limited to 15,000 characters.
+				span.validation.hint 0/1-15000
+			.form-group
+				label.required(for='invite') Invite URL
+				input#invite.form-control.validate(type='text' aria-describedby='inviteHelp' name='invite' data-min='1' data-max='500')
+				small#inviteHelp.form-text The full Discord OAuth link for inviting the bot.
+				span.validation.invisible.hint 0/1-500
+			.form-group
+				label.required(for='prefix') Prefix
+				input#prefix.form-control.validate(type='text' aria-describedby='prefixHelp' name='prefix' data-min='1' data-max='12')
+				small#prefixHelp.form-text Your prefix character(s) only, no more than that, except if it only accepts mentions.
+				span.validation.invisible.hint 0/1-12
+			.form-group
+				label.required(for='library') Library
+				select.custom-select#library(name='library' required)
+					option(selected disabled) Select a library...
+					for library in libraries
+						option(value=library.id) #{library.name}
+			.form-group
+				label.required(for='tags') Tags
+				select#tags.form-control(multiple name='tags' required)
+					for tag in tags
+						option(value=tag.id) #{tag.name}
+				small#tagsHelp.form-text Only 3 can be selected. Use Ctrl+Click to select multiple.
+			.form-group
+				label(for='support') Support Server
+				input#support.form-control.validate(type='text' aria-describedby='supportHelp' name='support' data-max='48')
+				small#supportHelp.form-text The code for the support server invite. It can be the full link or just the code, either works.
+				span.validation.invisible.hint 0/48
+			.form-group
+				label(for='secondaryOwners') Secondary Owners
+				input#secondaryOwners.form-control.validate(type='text' aria-describedby='secondaryOwnersHelp' name='secondary_owners' data-max='256')
+				small#secondaryOwnersHelp.form-text A list of secondary owners, listed by ID and separated by a comma.
+				span.validation.invisible.hint 0/256
+			.form-group
+				label(for='website') Website URL
+				input#website.form-control.validate(type='text' aria-describedby='websiteHelp' name='website' data-max='256')
+				small#websiteHelp.form-text The full link to your website or documentation for the bot. Not required to be filled out.
+				span.validation.invisible.hint 0/256
+			if user.donationTier > 1 || user.admin || user.developer
+				.form-group
+					label(for='vanity') Vanity URL
+					input#vanity.form-control.validate(type='text' aria-describedby='vanityHelp' name='vanity' data-max='48')
+					small#vanityHelp.form-text Replacement for the bot ID in the URL on the bot page. For example, "mybot" will allow https://botlist.space/bot/mybot to link to your bot.
+					span.validation.invisible.hint 0/48
+				.form-group
+					label(for='background') Card Background
+					input#background.form-control.validate(type='text' aria-describedby='backgroundHelp' name='background' data-max='256')
+					small#backgroundHelp.form-text
+						| A link to a background image to apply to the bot card on the listing pages. 
+						a(href='https://postimage.org') postimage.org
+						|  links are recommended.
+					span.validation.invisible.hint 0/256
+					button.btn.btn-dark.mt-3#card-preview(type='button') Expand Preview
+					#card-preview-container(style='height: 0; margin-top: 0; overflow: hidden;')
+						.row
+							.col-lg-6
+								.card.preview-card
+									.card-body
+										.head
+											img.float-left.lazy(src=avatarURL() onerror=onerror alt='Avatar for A bot username' draggable='false')
+											.content
+												h3(title='A bot username')
+													span A bot username
+													span(class='status online' title='Online')
+												p.description(title='A short description') A short description
+			.form-group
+				.alert.alert-success#req-success.d-none(role='alert') Successfully sent POST request to URL.
+				.alert.alert-danger#req-failed.d-none(role='alert') Failed to send POST request
+				label(for='webhook') Webhook URL
+				.input-group
+					input#webhook.form-control.validate(type='text' aria-describedby='webhookHelp' name='webhook' data-max='1024')
+					.input-group-append
+						button.btn.btn-minimal#send-webhook(type='button') Send Test Request
+				small#inviteHelp.form-text The URL to your website which will be sent a POST request when a user upvotes the bot. Authorization header will contain bot token, use it to verify origin.
+				span.validation.invisible.hint 0/1024
+			.form-group
+				.custom-control.custom-checkbox
+					input#avatarChildFriendly.custom-control-input(type='checkbox' name='child_friendly' checked)
+					label.custom-control-label(for='avatarChildFriendly') Avatar is child friendly
+			button.btn.btn-dark(type='submit') Submit
