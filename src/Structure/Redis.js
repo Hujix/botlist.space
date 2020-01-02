@@ -7,8 +7,6 @@ class Redis extends EventEmitter {
 
 		Object.assign(this, parent);
 
-		console.log(process.env.REDIS_AVATAR)
-
 		this.avatarDB = new Client(process.env.REDIS_AVATAR);
 		this.statusDB = new Client(process.env.REDIS_STATUS);
 		this.ipcDB = new Client(process.env.REDIS_IPC);
