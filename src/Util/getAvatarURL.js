@@ -1,1 +1,0 @@
-module.exports = (user) => user && user.avatar ? 'https://cdn.discordapp.com/avatars/' + user.id + '/' + user.avatar + '.' + (user.avatar.startsWith('a_') ? 'gif' : 'png') + '?size=256' : 'https://cdn.discordapp.com/embed/avatars/1.png';
