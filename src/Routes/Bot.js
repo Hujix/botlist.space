@@ -314,7 +314,7 @@ class Bot extends Route {
 			let audit = await this.db.getAllAuditsForBotWithUsersSorted(res.locals.bot.id);
 
 			audit = audit.map((log) => {
-				log.time = humanizeDuration(Date.now() - log.timestamp, { round: true });
+				log.time = humanizeDuration(Date.now() - log.timestamp, { round: true }) + ' ago';
 				log.alt_timestamp = dateformat(log.timestamp, 'mm/dd/yyyy HH:MM:ss (hh:MM:ss TT)');
 				if (log.type > 0) {
 					log.modifications = [];
