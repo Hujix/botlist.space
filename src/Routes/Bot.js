@@ -313,7 +313,7 @@ class Bot extends Route {
 		this.router.get('/:id/audit', this.checkAuth(), this.getBot(), this.botPermission(), async (req, res) => {
 			let audit = await this.db.getAllAuditsForBotWithUsersSorted(res.locals.bot.id);
 
-			audit = audit.map((log) => {;
+			audit = audit.map((log) => {
 				log.time = humanizeDuration(Date.now() - log.timestamp, { round: true });
 				log.alt_timestamp = dateformat(log.timestamp, 'mm/dd/yyyy HH:MM:ss (hh:MM:ss TT)');
 				if (log.type > 0) {
