@@ -331,7 +331,7 @@ class Admin extends Route {
 
 			if (library) return res.status(400).render('error.pug', { title: '409', code: 409, message: 'Library with that name already exists' });
 
-			await this.db.insertLibrary({ name: req.body.library_name });
+			await this.db.insertLibrary({ _id: uuid(), id: uuid(), name: req.body.library_name });
 
 			res.redirect('/admin/libraries');
 		});
