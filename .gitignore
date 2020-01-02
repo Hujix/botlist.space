@@ -4,6 +4,7 @@ node_modules/
 package-lock.json
 .env
 .vscode
+.idea
 src/Assets/**
 src/Static/**/*.min.*
 !src/Static/css/bootstrap.min.css

@@ -58,33 +58,45 @@ block content
 			h2 Top Voted Bots
 			p.mb-20 Discover this month's top voted bots.
 		ul.row.bot-list
-			for bot in topVotedBots
-				li.col-lg-4.col-md-6.col-sm-12
-					include include/bot-card.pug
+			if topVotedBots.length > 0
+				for bot in topVotedBots
+					li.col-lg-4.col-md-6.col-sm-12
+						include include/bot-card.pug
+			else
+				p.mb-20 There doesn't seem to be any bots here.
 		a.header-container.no-color(href='/bots/certified')
 			img(src='/img/certified.svg' draggable='false' alt='Certified')
 			h2 Certified Bots
 			p.mb-20 Find unique bots that fit into our certification program.
 		ul.row.bot-list
-			for bot in certified
-				li.col-lg-4.col-md-6.col-sm-12
-					include include/bot-card.pug
+			if certified.length > 0
+				for bot in certified
+					li.col-lg-4.col-md-6.col-sm-12
+						include include/bot-card.pug
+			else
+				p.mb-20 There doesn't seem to be any bots here.
 		a.header-container.no-color(href='/bots/new')
 			img(src='/img/analytics.svg' draggable='false' alt='Upvote')
 			h2 New Bots
 			p.mb-20 Hot off the press bots that were just recently approved.
 		ul.row.bot-list
-			for bot in newBots
-				li.col-lg-4.col-md-6.col-sm-12
-					include include/bot-card.pug
+			if newBots.length > 0
+				for bot in newBots
+					li.col-lg-4.col-md-6.col-sm-12
+						include include/bot-card.pug
+			else
+				p.mb-20 There doesn't seem to be any bots here.
 		.header-container
 			img(src='/img/fun.svg' draggable='false' alt='Upvote')
 			h2 Random Bots
 			p.mb-20 Randomly picked bots from our list.
 		ul.row.bot-list
-			for bot in randomBots
-				li.col-lg-4.col-md-6.col-sm-12
-					include include/bot-card.pug
+			if randomBots.length > 0
+				for bot in randomBots
+					li.col-lg-4.col-md-6.col-sm-12
+						include include/bot-card.pug
+			else
+				p.mb-20 There doesn't seem to be any bots here.
 	.container
 		h2 Why choose us?
 		p botlist.space is dedicated to provide a seamless and minimalist experience while searching for Discord bots. We release new features almost daily, and are always willing to go the extra mile. All of the bots listed here come from Discord users just like you who want to spice up their Discord community. Every bot on our site undergoes a strict and thorough inspection before becoming listed to ensure that these bots are the best of the best.
